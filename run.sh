@@ -218,10 +218,8 @@ compile_program() {
         OPENCV_FLAGS="-lopencv_core -lopencv_imgproc -lopencv_imgcodecs -lopencv_highgui"
     fi
     
-     | wc -l | xargs echo "Total processed images:"
-            echo ""
-            echo "Sample output files:"
-            ls random_greyscaled_images/ | head -10
+     echo "Total processed images: $(ls random_greyscaled_images/ | grep -E '\.(jpg|png|bmp)$' | wc -l)"
+
         fi
         
         if [ -d "comparison_images" ]; then
