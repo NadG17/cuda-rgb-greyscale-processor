@@ -97,19 +97,27 @@ for i in range(10):
 
 # 2. Gradient images
 for i in range(5):
-    img = np.zeros((512, 512, 3), dtype=np.uint8)
-    for x in range(512):
-        for y in range(512):
-            img[y, x] = [int(255*x/512), int(255*y/512), int(255*(x+y)/1024)]
-    cv2.imwrite(f'random_color_images/gradient_{i:03d}.jpg', img)
+    grad = np.zeros((512, 512, 3), dtype=np.uint8)
+    for y in range(512):
+        for x in range(512):
+            grad[y, x] = (
+                (x + 10*i) % 256,
+                (y + 20*i) % 256,
+                (x + y + 30*i) % 256
+            )
+    cv2.imwrite(f'random_color_images/gradient_{i:03d}.jpg', grad)
+
 
 # 3. Geometric patterns
-colors = [(255,0,0), (0,255,0), (0,0,255), (255,255,0), (255,0,255)]
 for i in range(5):
-    img = np.zeros((512, 512, 3), dtype=np.uint8)
-    for j, color in enumerate(colors):
-        cv2.circle(img, (256, 256), 50 + j*30, color, -1)
-    cv2.imwrite(f'random_color_images/circles_{i:03d}.jpg', img)
+    circles = np.zeros((512, 512, 3), dtype=np.uint8)
+    center = (256, 256)
+    step = 20 + i * 5
+    for r in range(step, 256, step):
+        color = ((r + 10*i) % 256, (r * 2 + i * 5) % 256, (r * 3 + i * 10) % 256)
+        cv2.circle(circles, center, r, color, thickness=5)
+    cv2.imwrite(f'random_color_images/circles_{i:03d}.jpg', circles)
+
 
 # 4. Large performance image
 img = np.random.randint(0, 256, (2048, 2048, 3), dtype=np.uint8)
