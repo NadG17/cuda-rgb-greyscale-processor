@@ -22,7 +22,7 @@ This project uses **NVIDIA CUDA** to convert RGB images to grayscale, leveraging
 - Click **Save**
 
 ### **3️⃣ Verify GPU Access**
-Paste this in the first code cell:
+Paste this in the first code cell, it should execute in about 30-40 seconds:
 
 ```python
 !nvidia-smi
